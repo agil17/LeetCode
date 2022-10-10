@@ -2,7 +2,7 @@ package Java;
 
 public class Palindrome {
     public static void main(String[] args) {
-        int x = 132 21;
+        int x = 13221;
         System.out.println(palindrome(x));
 
 
