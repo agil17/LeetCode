@@ -1,6 +1,5 @@
 
 
-import org.w3c.dom.ls.LSException;
 
 public class MergeTwoSortedLists {
     public static void main(String[] args) {
