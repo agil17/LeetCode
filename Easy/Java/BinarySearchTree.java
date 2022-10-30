@@ -45,6 +45,9 @@ class Node {
         if(root == null) {
             root.item = data;
         }
+        if(root.item > data) {
+          
+        }
     }
   
     void preorder(Node node) {
