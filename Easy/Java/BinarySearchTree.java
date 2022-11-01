@@ -1,15 +1,7 @@
 
-class Node {
-    int item;
-    Node left, right;
+
   
-    public Node(int key) {
-    item = key;
-    left = right = null;
-    }
-  }
-  
-  class BinarySearchTree {
+public  class BinarySearchTree {
     // Root of Binary Tree
     Node root;
   
@@ -81,4 +73,14 @@ class Node {
     System.out.println("\nPostorder traversal");
     tree.postorder(tree.root);
     }
+
+    static class Node {
+      int item;
+      Node left, right;
+    
+      public Node(int key) {
+      item = key;
+      left = right = null;
+      }
+  }
   }

@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 class TreeNode {
     int value;
@@ -31,6 +33,73 @@ public class BinaryTree {
         return list;
     }
 
+    public List<List<Integer>> levelOrderTraversal(TreeNode root) {
+        List<List<Integer>> list = new ArrayList<>();
+        levelOrder(root, list);
+        return list;
+    }
+
+    public void levelOrder(TreeNode root, List<List<Integer>> list) {
+        Queue<TreeNode> levelNodes = new LinkedList<>();
+        levelNodes.add(root);
+        
+        while(!levelNodes.isEmpty()) {
+            List<Integer> innerList = new ArrayList<>();
+            int size = levelNodes.size();
+
+            for(int i = 0; i < size; i++) {
+                TreeNode current = levelNodes.poll();
+
+                innerList.add(current.value);
+
+                if(current.left != null) {
+                    levelNodes.add(current.left);
+                }
+                if(current.right != null) {
+                    levelNodes.add(current.right);       
+                }
+            }
+            list.add(innerList);
+        }
+
+    }
+
+    public void printLevels(List<List<Integer>> list) {
+        for(int i = 0; i < list.size(); i++) {
+            for(int j = 0; j < list.get(i).size(); j++) {
+                System.out.printf("%d ", list.get(i).get(j));
+            }
+            System.out.println();
+        }
+    }
+
+    public int minDepth(TreeNode root) {
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+
+        int minDepth = 0;
+
+        while(!q.isEmpty()) {
+            int size = q.size();
+
+            for(int i = 0; i < size; i++) {
+                TreeNode current = q.poll();
+                if(current.left == null && current.right == null) {
+                    return minDepth + 1;
+                }
+                if(current.left != null) {
+                    q.add(current.left);
+                }
+                if(current.right != null) {
+                    q.add(current.right);
+                }
+            }
+            minDepth++;
+        }
+        return minDepth;
+
+    }
+
     public void inOrder(TreeNode root, List<Integer> list) {
         if(root == null) {
             return;
@@ -51,12 +120,13 @@ public class BinaryTree {
         tree.root.left.right = new TreeNode(12);
         tree.root.right.left = new TreeNode(18);
         tree.root.right.right = new TreeNode(24);
+        tree.root.right.right.right = new TreeNode(14);
 
-        List<Integer> list = tree.inOrderTraversal(tree.root);
-        for(Integer i : list) {
-            System.out.printf("%d ", i);
-        }
-        System.out.println();
+        List<List<Integer>> list = tree.levelOrderTraversal(tree.root);
+
+        tree.printLevels(list);
+        
+        
     }
 }
 
