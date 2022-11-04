@@ -111,20 +111,49 @@ public class BinaryTree {
         
     }
 
+    public boolean isBalanced(TreeNode root) {
+        if(root == null) {
+            return true;
+        }
+        int left = maxDepth(root.left);
+        int right = maxDepth(root.right);
+
+        if(Math.abs(left - right) <= 1 && isBalanced(root.left) && isBalanced(root.right)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public int maxDepth(TreeNode root) {
+        if(root == null) {
+            return 0;
+        }
+
+        int left = maxDepth(root.left);
+        int right = maxDepth(root.right);
+
+        if(left > right) {
+            return left + 1;
+        }
+        else {
+            return right + 1;
+        }
+    }
+
     public static void main(String[] args) {
         BinaryTree tree = new BinaryTree();
         tree.root = new TreeNode(15);
         tree.root.left = new TreeNode(10);
         tree.root.right = new TreeNode(22);
-        tree.root.left.left = new TreeNode(4);
-        tree.root.left.right = new TreeNode(12);
-        tree.root.right.left = new TreeNode(18);
+        // tree.root.left.left = new TreeNode(4);
+        // tree.root.left.right = new TreeNode(12);
+        // tree.root.right.left = new TreeNode(18);
         tree.root.right.right = new TreeNode(24);
         tree.root.right.right.right = new TreeNode(14);
 
-        List<List<Integer>> list = tree.levelOrderTraversal(tree.root);
-
-        tree.printLevels(list);
+        System.out.println(tree.isBalanced(tree.root));
         
         
     }
